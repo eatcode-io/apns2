@@ -3,10 +3,12 @@
 	"ignore": "test github.com/stretchr/testify/assert/ gopkg.in/alecthomas/kingpin.v2/",
 	"package": [
 		{
-			"checksumSHA1": "GXOurDGgsLmJs0wounpdWZZRSGw=",
-			"path": "github.com/dgrijalva/jwt-go",
-			"revision": "a539ee1a749a2b895533f979515ac7e6e0f5b650",
-			"revisionTime": "2017-06-08T00:51:49Z"
+			"checksumSHA1": "C67TklgGiG9QWMxvya94UNqmbas=",
+			"path": "github.com/golang-jwt/jwt",
+			"revision": "c435f38291bfed5322cf0f4ed12d1f8668ceaeb3",
+			"revisionTime": "2021-11-24T13:27:41Z",
+			"version": "v4.2.0",
+			"versionExact": "v4.2.0"
 		},
 		{
 			"checksumSHA1": "ixXpRfdCdlwvjU2IT6SXM9lIHmA=",
@@ -19,18 +21,6 @@
 			"path": "golang.org/x/crypto/pkcs12/internal/rc2",
 			"revision": "ab89591268e0c8b748cbe4047b00197516011af5",
 			"revisionTime": "2017-05-12T12:41:09Z"
-		},
-		{
-			"checksumSHA1": "Y+HGqEkYM15ir+J93MEaHdyFy0c=",
-			"path": "golang.org/x/net/context",
-			"revision": "84f0e6f92b10139f986b1756e149a7d9de270cdc",
-			"revisionTime": "2017-05-12T21:27:43Z"
-		},
-		{
-			"checksumSHA1": "WHc3uByvGaMcnSoI21fhzYgbOgg=",
-			"path": "golang.org/x/net/context/ctxhttp",
-			"revision": "84f0e6f92b10139f986b1756e149a7d9de270cdc",
-			"revisionTime": "2017-05-12T21:27:43Z"
 		},
 		{
 			"checksumSHA1": "Wl71V4Lh2iajiRnVAMPtd276vTg=",
@@ -81,5 +71,5 @@
 			"revisionTime": "2017-04-21T08:09:44Z"
 		}
 	],
-	"rootPath": "github.com/sideshow/apns2"
+	"rootPath": "github.com/braze-inc/apns2"
 }
