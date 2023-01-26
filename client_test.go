@@ -8,10 +8,11 @@ import (
 	"crypto/tls"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 	"time"
 
@@ -340,7 +341,7 @@ func TestAuthorizationHeader(t *testing.T) {
 func TestPayload(t *testing.T) {
 	n := mockNotification()
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		body, err := ioutil.ReadAll(r.Body)
+		body, err := io.ReadAll(r.Body)
 		assert.NoError(t, err)
 		assert.Equal(t, n.Payload, body)
 	}))
