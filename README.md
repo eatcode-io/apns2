@@ -18,7 +18,7 @@ There are a few minor changes and the removal of insecure dependencies.
 - Works with go 1.7 and later
 - Supports new Apple Token Based Authentication (JWT)
 - Supports new iOS 10 features such as Collapse IDs, Subtitles and Mutable Notifications
-- Supports new iOS 15 fetaures interruptionLevel and relevanceScore
+- Supports new iOS 15 features interruptionLevel and relevanceScore
 - Supports persistent connections to APNs
 - Supports VoIP/PushKit notifications (iOS 8 and later)
 - Modular & easy to use
@@ -34,6 +34,7 @@ go get -u github.com/razor-1/apns2
 ```
 
 If you are running the test suite you will also need to install testify:
+
 ```sh
 go get -u github.com/stretchr/testify
 ```
@@ -67,7 +68,7 @@ func main() {
   // client := apns2.NewClient(cert).Development()
   // For apps published to the app store or installed as an ad-hoc distribution use Production()
 
-  client := apns2.NewClient(cert).Production()  
+  client := apns2.NewClient(cert).Production()
   res, err := client.Push(notification)
 
   if err != nil {

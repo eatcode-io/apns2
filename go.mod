@@ -3,10 +3,10 @@ module github.com/razor-1/apns2
 go 1.17
 
 require (
-	github.com/golang-jwt/jwt/v4 v4.1.0
+	github.com/golang-jwt/jwt/v4 v4.4.1
 	github.com/stretchr/testify v1.7.0
 	golang.org/x/crypto v0.0.0-20170512130425-ab89591268e0
-	golang.org/x/net v0.0.0-20211108170745-6635138e15ea
+	golang.org/x/net v0.0.0-20220403103023-749bd193bc2b
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 )
 

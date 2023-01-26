@@ -140,7 +140,11 @@ func TestDialTLSTimeout(t *testing.T) {
 	if _, e = dialTLS("tcp", address, nil); e == nil {
 		t.Fatal("Dial completed successfully")
 	}
-	assert.Truef(t, errors.Is(e, context.DeadlineExceeded), "unexpected error %v of type %T", e, e)
+	// Go 1.7.x and later will return a context deadline exceeded error
+	// Previous versions will return a time out
+	if !strings.Contains(e.Error(), "timed out") && !errors.Is(e, context.DeadlineExceeded) {
+		t.Errorf("Unexpected error: %s", e)
+	}
 }
 
 // Functional Tests
@@ -207,6 +211,21 @@ func TestClientPushWithContext(t *testing.T) {
 	assert.Equal(t, res.ApnsID, apnsID)
 }
 
+func TestClientPushWithNilContext(t *testing.T) {
+	n := mockNotification()
+	var apnsID = "02ABC856-EF8D-4E49-8F15-7B8A61D978D6"
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
+		w.Header().Set("apns-id", apnsID)
+		w.WriteHeader(http.StatusOK)
+	}))
+	defer server.Close()
+
+	res, err := mockClient(server.URL).PushWithContext(nil, n)
+	assert.EqualError(t, err, "net/http: nil Context")
+	assert.Nil(t, res)
+}
+
 func TestHeaders(t *testing.T) {
 	n := mockNotification()
 	n.ApnsID = "84DB694F-464F-49BD-960A-D6DB028335C9"
@@ -242,6 +261,17 @@ func TestPushTypeBackgroundHeader(t *testing.T) {
 	n.PushType = apns.PushTypeBackground
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, "background", r.Header.Get("apns-push-type"))
+	}))
+	defer server.Close()
+	_, err := mockClient(server.URL).Push(n)
+	assert.NoError(t, err)
+}
+
+func TestPushTypeLocationHeader(t *testing.T) {
+	n := mockNotification()
+	n.PushType = apns.PushTypeLocation
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		assert.Equal(t, "location", r.Header.Get("apns-push-type"))
 	}))
 	defer server.Close()
 	_, err := mockClient(server.URL).Push(n)
