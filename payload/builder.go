@@ -53,6 +53,7 @@ type aps struct {
 	URLArgs           []string               `json:"url-args,omitempty"`
 	ContentState      map[string]interface{} `json:"content-state,omitempty"`
 	DismissalDate     int64                  `json:"dismissal-date,omitempty"`
+	StaleDate         int64                  `json:"stale-date,omitempty"`
 	Event             ELiveActivityEvent     `json:"event,omitempty"`
 	Timestamp         int64                  `json:"timestamp,omitempty"`
 }
@@ -106,11 +107,20 @@ func (p *Payload) SetContentState(contentState map[string]interface{}) *Payload 
 }
 
 // SetDismissalDate sets the aps dismissal-date on the payload.
-// This will end live activity on dismissal date timestamp.
+// This will remove the live activity from the user's UI at the given timestamp.
 //
 //	{"aps":{"dismissal-date": DismissalDate }}`
 func (p *Payload) SetDismissalDate(dismissalDate int64) *Payload {
 	p.aps().DismissalDate = dismissalDate
+	return p
+}
+
+// SetStaleDate sets the aps stale-date on the payload.
+// This will mark this live activity update as outdated at the given timestamp.
+//
+//	{"aps":{"stale-date": StaleDate }}`
+func (p *Payload) SetStaleDate(staleDate int64) *Payload {
+	p.aps().StaleDate = staleDate
 	return p
 }
 
