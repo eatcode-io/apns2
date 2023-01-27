@@ -52,9 +52,9 @@ type aps struct {
 	ThreadID          string                 `json:"thread-id,omitempty"`
 	URLArgs           []string               `json:"url-args,omitempty"`
 	ContentState      map[string]interface{} `json:"content-state,omitempty"`
-	DismissalDate     float64                `json:"dismissal-date,omitempty"`
+	DismissalDate     int64                  `json:"dismissal-date,omitempty"`
 	Event             ELiveActivityEvent     `json:"event,omitempty"`
-	Timestamp         float64                `json:"timestamp,omitempty"`
+	Timestamp         int64                  `json:"timestamp,omitempty"`
 }
 
 type alert struct {
@@ -109,15 +109,15 @@ func (p *Payload) SetContentState(contentState map[string]interface{}) *Payload 
 // This will end live activity on dismissal date timestamp.
 //
 //	{"aps":{"dismissal-date": DismissalDate }}`
-func (p *Payload) SetDismissalDate(dismissalDate float64) *Payload {
+func (p *Payload) SetDismissalDate(dismissalDate int64) *Payload {
 	p.aps().DismissalDate = dismissalDate
 	return p
 }
 
-// SetDismissalDate sets the aps dismissal-date on the payload.
-// This will end live activity on dismissal date timestamp.
+// SetEvent sets the aps event type on the payload.
+// This can either be `LiveActivityEventUpdate` or `LiveActivityEventEnd`
 //
-//	{"aps":{"dismissal-date": DismissalDate }}`
+//	{"aps":{"event": Event }}`
 func (p *Payload) SetEvent(event ELiveActivityEvent) *Payload {
 	p.aps().Event = event
 	return p
@@ -127,7 +127,7 @@ func (p *Payload) SetEvent(event ELiveActivityEvent) *Payload {
 // This will let live activity know when to update the stuff.
 //
 //	{"aps":{"timestamp": Timestamp }}`
-func (p *Payload) SetTimestamp(timestamp float64) *Payload {
+func (p *Payload) SetTimestamp(timestamp int64) *Payload {
 	p.aps().Timestamp = timestamp
 	return p
 }
@@ -269,7 +269,7 @@ func (p *Payload) AlertLaunchImage(image string) *Payload {
 // specifiers in loc-key. See Localized Formatted Strings in Apple
 // documentation for more information.
 //
-//  {"aps":{"alert":{"loc-args":args}}}
+//	{"aps":{"alert":{"loc-args":args}}}
 func (p *Payload) AlertLocArgs(args []string) *Payload {
 	p.aps().alert().LocArgs = args
 	return p
