@@ -66,7 +66,7 @@ const (
 
 	// PushTypeLiveActivity is used for Live Activities that display various
 	// real-time information. If you set this push type, the topic field must
-	// use your app’s bundle ID with push-type.liveactivity appended to the end.
+	// use your app’s bundle ID with `push-type.liveactivity` appended to the end.
 	// The live activity push supports only token-based authentication. This
 	// push type is recommended for iOS. It is not available on macOS, tvOS,
 	// watchOS and iPadOS.
