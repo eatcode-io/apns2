@@ -9,7 +9,7 @@ import (
 	"crypto/tls"
 	"encoding/json"
 	"io"
-	"log"
+	"log/slog"
 	"net"
 	"net/http"
 	"strconv"
@@ -184,18 +184,20 @@ func (c *Client) PushWithContext(ctx Context, n *Notification) (*Response, error
 
 	setHeaders(request, n)
 
-	log.Println("Request url:")
-	log.Println(string(url))
+	if slog.Default().Enabled(context.Background(), slog.LevelDebug) {
+		slog.Debug("Request url:")
+		slog.Debug(string(url))
 
-	log.Println("Request payload:")
-	log.Println(string(payload))
+		slog.Debug("Request payload:")
+		slog.Debug(string(payload))
 
-	log.Println("Request headers:")
-	headerJson, err := json.Marshal(request.Header)
-	if err != nil {
-		log.Println("Error marshaling header:", err)
-	} else {
-		log.Println("Header:", string(headerJson))
+		slog.Debug("Request headers:")
+		headerJson, err := json.Marshal(request.Header)
+		if err != nil {
+			slog.Debug("Error marshaling header:", err)
+		} else {
+			slog.Debug("Header:", string(headerJson))
+		}
 	}
 
 	response, err := c.HTTPClient.Do(request)
