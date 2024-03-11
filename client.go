@@ -185,18 +185,16 @@ func (c *Client) PushWithContext(ctx Context, n *Notification) (*Response, error
 	setHeaders(request, n)
 
 	if slog.Default().Enabled(context.Background(), slog.LevelDebug) {
-		slog.Debug("Request url:")
-		slog.Debug(string(url))
+		slog.Debug("APNS request url:", string(url))
 
-		slog.Debug("Request payload:")
-		slog.Debug(string(payload))
+		slog.Debug("APNS request payload:", string(payload))
 
-		slog.Debug("Request headers:")
+		slog.Debug("APNS request headers:")
 		headerJson, err := json.Marshal(request.Header)
 		if err != nil {
-			slog.Debug("Error marshaling header:", err)
+			slog.Debug("APNS rrror marshaling header:", err)
 		} else {
-			slog.Debug("Header:", string(headerJson))
+			slog.Debug("APNS request header:", string(headerJson))
 		}
 	}
 
@@ -243,9 +241,10 @@ func setHeaders(r *http.Request, n *Notification) {
 	if n.Priority > 0 {
 		r.Header.Set("apns-priority", strconv.Itoa(n.Priority))
 	}
-	if !n.Expiration.IsZero() {
-		r.Header.Set("apns-expiration", strconv.FormatInt(n.Expiration.Unix(), 10))
-	}
+	slog.Debug("APNS not setting apns-expiration header for testing")
+	// if !n.Expiration.IsZero() {
+		// r.Header.Set("apns-expiration", strconv.FormatInt(n.Expiration.Unix(), 10))
+	//}
 	if n.PushType != "" {
 		r.Header.Set("apns-push-type", string(n.PushType))
 	} else {
