@@ -6,8 +6,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/razor-1/apns2"
-	"github.com/razor-1/apns2/token"
+	"github.com/eatcode-io/apns2"
+	"github.com/eatcode-io/apns2/token"
 )
 
 func main() {

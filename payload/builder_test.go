@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/razor-1/apns2/payload"
+	. "github.com/eatcode-io/apns2/payload"
 	"github.com/stretchr/testify/assert"
 )
 

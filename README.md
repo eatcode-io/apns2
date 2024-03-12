@@ -2,9 +2,9 @@
 
 APNS/2 is a go package designed for simple, flexible and fast Apple Push Notifications on iOS, OSX and Safari using the new HTTP/2 Push provider API.
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/razor-1/apns2/test?style=flat-square)](https://github.com/razor-1/apns2/actions?query=workflow%3Atest)
-[![GoDoc](https://godoc.org/github.com/razor-1/apns2?status.svg)](https://godoc.org/github.com/razor-1/apns2)
-[![Go Report Card](https://goreportcard.com/badge/github.com/razor-1/localizer?style=flat-square)](https://goreportcard.com/report/github.com/razor-1/apns2)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/razor-1/apns2/test?style=flat-square)](https://github.com/eatcode-io/apns2/actions?query=workflow%3Atest)
+[![GoDoc](https://godoc.org/github.com/eatcode-io/apns2?status.svg)](https://godoc.org/github.com/eatcode-io/apns2)
+[![Go Report Card](https://goreportcard.com/badge/github.com/razor-1/localizer?style=flat-square)](https://goreportcard.com/report/github.com/eatcode-io/apns2)
 
 ## Fork
 
@@ -14,7 +14,7 @@ There are a few minor changes and the removal of insecure dependencies.
 ## Features
 
 - Uses new Apple APNs HTTP/2 connection
-- Fast - See [notes on speed](https://github.com/razor-1/apns2/wiki/APNS-HTTP-2-Push-Speed)
+- Fast - See [notes on speed](https://github.com/eatcode-io/apns2/wiki/APNS-HTTP-2-Push-Speed)
 - Works with go 1.7 and later
 - Supports new Apple Token Based Authentication (JWT)
 - Supports new iOS 10 features such as Collapse IDs, Subtitles and Mutable Notifications
@@ -30,7 +30,7 @@ There are a few minor changes and the removal of insecure dependencies.
 - Install apns2:
 
 ```sh
-go get -u github.com/razor-1/apns2
+go get -u github.com/eatcode-io/apns2
 ```
 
 If you are running the test suite you will also need to install testify:
@@ -48,8 +48,8 @@ import (
   "log"
   "fmt"
 
-  "github.com/razor-1/apns2"
-  "github.com/razor-1/apns2/certificate"
+  "github.com/eatcode-io/apns2"
+  "github.com/eatcode-io/apns2/certificate"
 )
 
 func main() {
@@ -140,7 +140,7 @@ notification.Payload = payload
 client.Push(notification)
 ```
 
-Refer to the [payload](https://godoc.org/github.com/razor-1/apns2/payload) docs for more info.
+Refer to the [payload](https://godoc.org/github.com/eatcode-io/apns2/payload) docs for more info.
 
 ## Response, Error handling
 
@@ -181,17 +181,17 @@ defer cancel()
 
 ## Speed & Performance
 
-Also see the wiki page on [APNS HTTP 2 Push Speed](https://github.com/razor-1/apns2/wiki/APNS-HTTP-2-Push-Speed).
+Also see the wiki page on [APNS HTTP 2 Push Speed](https://github.com/eatcode-io/apns2/wiki/APNS-HTTP-2-Push-Speed).
 
 For best performance, you should hold on to an `apns2.Client` instance and not re-create it every push. The underlying TLS connection itself can take a few seconds to connect and negotiate, so if you are setting up an `apns2.Client` and tearing it down every push, then this will greatly affect performance. (Apple suggest keeping the connection open all the time).
 
 You should also limit the amount of `apns2.Client` instances. The underlying transport has a http connection pool itself, so a single client instance will be enough for most users (One instance can potentially do 4,000+ pushes per second). If you need more than this then one instance per CPU core is a good starting point.
 
-Speed is greatly affected by the location of your server and the quality of your network connection. If you're just testing locally, behind a proxy or if your server is outside USA then you're not going to get great performance. With a good server located in AWS, you should be able to get [decent throughput](https://github.com/razor-1/apns2/wiki/APNS-HTTP-2-Push-Speed).
+Speed is greatly affected by the location of your server and the quality of your network connection. If you're just testing locally, behind a proxy or if your server is outside USA then you're not going to get great performance. With a good server located in AWS, you should be able to get [decent throughput](https://github.com/eatcode-io/apns2/wiki/APNS-HTTP-2-Push-Speed).
 
 ## Command line tool
 
-APNS/2 has a command line tool that can be installed with `go get github.com/razor-1/apns2/apns2`. Usage:
+APNS/2 has a command line tool that can be installed with `go get github.com/eatcode-io/apns2/apns2`. Usage:
 
 ```
 apns2 --help

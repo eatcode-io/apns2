@@ -7,9 +7,9 @@ import (
 
 	"flag"
 
-	"github.com/razor-1/apns2"
-	"github.com/razor-1/apns2/certificate"
-	"github.com/razor-1/apns2/payload"
+	"github.com/eatcode-io/apns2"
+	"github.com/eatcode-io/apns2/certificate"
+	"github.com/eatcode-io/apns2/payload"
 )
 
 func main() {

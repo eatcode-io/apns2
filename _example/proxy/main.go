@@ -10,8 +10,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/razor-1/apns2"
-	"github.com/razor-1/apns2/certificate"
+	"github.com/eatcode-io/apns2"
+	"github.com/eatcode-io/apns2/certificate"
 	"golang.org/x/net/http2"
 )
 

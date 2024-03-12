@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/razor-1/apns2/token"
+	"github.com/eatcode-io/apns2/token"
 	"github.com/stretchr/testify/assert"
 )
 

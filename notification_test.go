@@ -3,7 +3,7 @@ package apns2_test
 import (
 	"testing"
 
-	"github.com/razor-1/apns2"
+	"github.com/eatcode-io/apns2"
 	"github.com/stretchr/testify/assert"
 )
 
