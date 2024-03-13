@@ -27,10 +27,13 @@ const (
 type ELiveActivityEvent string
 
 const (
-	// LiveActivityEventUpdate is used to update an live activity.
+	// LiveActivityEventStart is used to start a live activity.
+	LiveActivityEventStart ELiveActivityEvent = "start"
+
+	// LiveActivityEventUpdate is used to update a live activity.
 	LiveActivityEventUpdate ELiveActivityEvent = "update"
 
-	// LiveActivityEventEnd is used to end an live activity.
+	// LiveActivityEventEnd is used to end a live activity.
 	LiveActivityEventEnd ELiveActivityEvent = "end"
 )
 
